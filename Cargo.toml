@@ -1,0 +1,23 @@
+[package]
+name = "async-logger"
+version = "0.1.0"
+edition = "2021"
+authors = ["Lut99"]
+repository = "https://github.com/Lut99/async-logger-rs"
+description = "A logger for Rust projects relying on tokio parallelism - e.g., webservers."
+
+
+[dependencies]
+atty = { version = "0.2", optional = true }
+console = { version = "0.15", optional = true }
+error-trace = { git = "https://github.com/Lut99/error-trace-rs", optional = true }
+log = "0.4"
+tokio = { version = "1.38", default-features = false, features = ["fs", "rt", "sync"], optional = true }
+
+
+[features]
+default = ["color"]
+
+color = ["dep:atty", "dep:console"]
+
+tokio = ["dep:error-trace", "dep:tokio"]
